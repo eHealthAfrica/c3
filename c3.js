@@ -1234,6 +1234,7 @@
             bar_width_ratio: 0.6,
             bar_width_max: undefined,
             bar_zerobased: true,
+            bar_space: 0,
             // area
             area_zerobased: true,
             area_above: false,
@@ -3365,14 +3366,17 @@
             axis = isSub ? $$.subXAxis : $$.xAxis,
             barTargetsNum = barIndices.__max__ + 1,
             barW = $$.getBarW(axis, barTargetsNum),
-            barX = $$.getShapeX(barW, barTargetsNum, barIndices, !!isSub),
+            barSpaceWidth = barW * $$.config.bar_space,
+            barX = $$.getShapeX(barW + barSpaceWidth, barTargetsNum, barIndices, !!isSub),
+            // barX = $$.getShapeX(barW, barTargetsNum, barIndices, !!isSub),
             barY = $$.getShapeY(!!isSub),
             barOffset = $$.getShapeOffset($$.isBarType, barIndices, !!isSub),
             yScale = isSub ? $$.getSubYScale : $$.getYScale;
         return function (d, i) {
             var y0 = yScale.call($$, d.id)(0),
                 offset = barOffset(d, i) || y0, // offset is for stacked bar chart
-                posX = barX(d), posY = barY(d);
+                posX = barX(d) + barSpaceWidth / 2, posY = barY(d);
+            // posX = barX(d), posY = barY(d);
             // fix posY not to overflow opposite quadrant
             if ($$.config.axis_rotated) {
                 if ((0 < d.value && posY < y0) || (d.value < 0 && y0 < posY)) { posY = y0; }

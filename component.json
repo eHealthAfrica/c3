@@ -1,8 +1,8 @@
 {
   "name": "c3",
-  "repo": "masayuki0812/c3",
-  "description": "A D3-based reusable chart library",
-  "version": "0.4.11",
+  "repo": "eHealthAfrica/c3",
+  "description": "A D3-based reusable chart library - Forked from masayuki0812/c3",
+  "version": "0.4.12",
   "keywords": [],
   "dependencies": {
     "mbostock/d3": "v3.5.6"
